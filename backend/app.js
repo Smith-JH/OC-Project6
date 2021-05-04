@@ -1,6 +1,3 @@
-//mongoDB user password: 6vAmzP47smNJTLL
-//mongoDB connection: mongodb+srv://Jack:<password>@cluster0.srpw4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
 //import express for buiding the express app
 const express = require('express');
 //import body parser to extract JSON object from POST request coming from website
