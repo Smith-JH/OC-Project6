@@ -13,7 +13,10 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://Jack:6vAmzP47smNJTLL@cluster0.srpw4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+//Limited access mongoDB admin (access to modify the database contents)
+mongoose.connect('mongodb+srv://User:b2nHp5zRyaMF4sGo@cluster0.srpw4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+//Full access mongoDB admin (access to delete and modify tables)
+//mongoose.connect('mongodb+srv://Jack:6vAmzP47smNJTLL@cluster0.srpw4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
     .then(() => {
         console.log('Successfully connected to MongoDB Atlas!');
     })
@@ -34,9 +37,8 @@ app.use((req, res, next) => {
 //set bodyParser's json function as global middleware for the app
 app.use(bodyParser.json());
 
-//
+////where to find the images
 app.use('/images', express.static(path.join(__dirname, 'images')));
-
 //where to look for the sauce routes
 app.use('/api/sauces', sauceRoutes);
 //where to look for authentication routes

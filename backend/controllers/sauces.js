@@ -57,7 +57,8 @@ exports.modifySauce = (req, res, next) => {
     let sauce = new Sauce({ _id: req.params._id });
     if (req.file) {             
         const url = req.protocol + '://' + req.get('host');
-        req.body.sauce = JSON.parse(req.body.sauce);    
+        req.body.sauce = JSON.parse(req.body.sauce);
+        //sauce.remove({imageUrl});    <- need to remove the previous image, if the PUT modification replaces the user's image
         sauce = {
             _id: req.params.id,
             userId: req.body.sauce.userId,
@@ -67,10 +68,10 @@ exports.modifySauce = (req, res, next) => {
             mainPepper: req.body.sauce.mainPepper,
             imageUrl: url + '/images/' + req.file.filename,
             heat: req.body.sauce.heat,
-            likes: 0,
-            dislikes: 0,
-            usersLiked: [],
-            usersDisliked: [],
+            //likes: 0,
+            //dislikes: 0,
+            //usersLiked: [],
+            //usersDisliked: [],
         }
     } else {
         sauce = {
@@ -80,12 +81,12 @@ exports.modifySauce = (req, res, next) => {
             manufacturer: req.body.manufacturer,
             description: req.body.description,
             mainPepper: req.body.mainPepper,
-            imageUrl: req.body.imageUrl,
+            //imageUrl: req.body.imageUrl,      //removing this line just keeps the image that was there previously
             heat: req.body.heat,
-            // likes: req.body.likes,
-            // dislikes: req.body.dislikes,
-            // usersLiked: req.body.usersLiked,
-            // usersDisliked: req.body.usersDisliked,
+            //likes: req.body.likes,
+            //dislikes: req.body.dislikes,
+            //usersLiked: req.body.usersLiked,
+            //usersDisliked: req.body.usersDisliked,
         };
     }
     Sauce.updateOne({_id: req.params.id}, sauce)

@@ -37,7 +37,7 @@ exports.login = (req, res, next) => {
             });
         } bcrypt.compare(req.body.password, user.password)  //use bcrypt to compare entered password with hashed password in DB
         .then((valid) => {
-            if (!valid) {
+            if (!valid) {                                   //invalid password = 401 error 
                 return res.status(401).json({
                 error: new Error('Incorrect password!')
                 });                                     //By this point, user exists and password is correct
